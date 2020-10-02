@@ -56,6 +56,21 @@ console the input from the keyboard
 
 ## Practical 2.3
 
+In the `Variables` class and in the method `binaryToDecimal`, complete the
+ method to convert a binary number to a decimal
+ 
+*Hint* use the Integer class
+
+## Practical 2.3.1
+
+Extension: In the `Variables` class and in the method `binaryToHex`, complete
+ the method to convert a binary number to a hexadecimal
+ 
+## Practical 2.3.2
+
+Extension: In the `Variables` class and in the method `binaryToOctal`, complete
+ the method to convert a binary number to an octal
+
 ## Practical 2.4
 
 ## Practical 2.5
