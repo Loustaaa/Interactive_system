@@ -46,6 +46,14 @@ false
 
 ## Practical 2.2
 
+In the `Input.java` file complete the main method so that it accepts input from
+the keyboard and prints it back to the console
+
+### Practical 2.2.1
+
+Extension: Modify the main method so that you can input twice and print out to
+console the input from the keyboard
+
 ## Practical 2.3
 
 ## Practical 2.4
