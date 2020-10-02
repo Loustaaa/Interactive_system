@@ -73,4 +73,29 @@ Extension: In the `Variables` class and in the method `binaryToOctal`, complete
 
 ## Practical 2.4
 
+In the `Circle` class main method, write code to print the area and perimeter
+ of a circle when given the radius.
+ 
+ *Hint:* Use `Math.pi()`
+
+Area = pi * radius^2
+Perimeter = 2 * pi * radius
+
+Expected Output given radius 7.5:
+
+```
+Perimeter is = 47.12388980384689                                                                              
+Area is = 176.71458676442586
+```
+
 ## Practical 2.5
+
+In the `Triangle` class main method, write code to print the area and perimeter
+ of a triangle when given the height and width.
+ 
+ Expected Output given width 5.6, and height 8.5
+ 
+```
+28.20 
+47.60 
+```
