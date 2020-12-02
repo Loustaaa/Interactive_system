@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 public class Library {
 
-    SortedArrayList userList;
-    SortedArrayList bookList;
+    SortedArrayList<User> userList;
+    SortedArrayList<Book> bookList;
     ArrayList<Borrows> borrowList;
     static Scanner inFile;
     static PrintWriter outfile;
 
     public Library(String inPathName, String outPathName) throws Exception {
-        this.userList = new SortedArrayList();
-        this.bookList = new SortedArrayList();
+        this.userList = new SortedArrayList<>();
+        this.bookList = new SortedArrayList<>();
         this.borrowList = new ArrayList();
         this.inFile = new Scanner(new FileReader(inPathName));
         this.outfile = new PrintWriter(outPathName);
@@ -77,7 +77,7 @@ public class Library {
                         "Your copy of %s by %s %s has been requested by another library member. \n" +
                         "Please could you return it as soon as possible. \n \n" +
                         "Regards, \n" +
-                        "Fake Town Library", user.getFirstName(), user.getSurname(), book.getTitle(), book.getAuthorName(), book.getAuthorSurname());
+                        "Fake Town Library \n \n", user.getFirstName(), user.getSurname(), book.getTitle(), book.getAuthorName(), book.getAuthorSurname());
                 outfile.write(receipt);
             }
         }
@@ -199,16 +199,15 @@ public class Library {
     }
 
     public User findUser(String fName, String sName) {
-        User user = null;
         for (Object u : userList) {
-            user = (User) u;
+            User user = (User) u;
             String firstName = user.getFirstName();
             String surname = user.getSurname();
             if ((fName.matches(firstName)) && (sName.matches(surname))) {
                 return user;
             }
         }
-        return user;
+        return new User(fName, sName);
     }
 
     public void close() {

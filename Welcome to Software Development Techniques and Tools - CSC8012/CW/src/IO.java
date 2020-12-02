@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.Scanner;
 
 public class IO {
@@ -65,17 +64,16 @@ public class IO {
         System.out.println("------------------------------");
     }
 
-
     private static void issueBook() {
         Book book = null;
         int attempts = 3;
         while (attempts != 0) {
             System.out.println("Please enter the book's title: ");
-            String title = sc.nextLine();
+            String title = capitalize(sc.nextLine());
             System.out.println("Please enter author's surname: ");
-            String surname = sc.nextLine();
+            String surname = capitalize(sc.nextLine());
             System.out.println("Please enter author's first name and/or initials: ");
-            String firstName = sc.nextLine();
+            String firstName = capitalize(sc.nextLine());
             book = new Book(title, firstName, surname);
             if (!l.isValidBook(book)) {
                 System.out.println("Invalid book.");
@@ -97,9 +95,9 @@ public class IO {
         attempts = 3;
         while (attempts != 0) {
             System.out.println("Please enter member's first name: ");
-            String firstName = sc.nextLine();
+            String firstName = capitalize(sc.nextLine());
             System.out.println("Please enter member's surname: ");
-            String surname = sc.nextLine();
+            String surname = capitalize(sc.nextLine());
             user = l.findUser(firstName, surname);
             if (!l.isValidUser(user)) {
                 System.out.println("Not a member.");
@@ -126,11 +124,11 @@ public class IO {
         int attempts = 3;
         while (attempts != 0) {
             System.out.println("Please enter the book's title: ");
-            String title = sc.nextLine();
+            String title = capitalize(sc.nextLine());
             System.out.println("Please enter author's surname: ");
-            String surname = sc.nextLine();
+            String surname = capitalize(sc.nextLine());
             System.out.println("Please enter author's first name and/or initials: ");
-            String firstName = sc.nextLine();
+            String firstName = capitalize(sc.nextLine());
             book = new Book(title, firstName, surname);
             if (!l.isValidBook(book)) {
                 System.out.println("Invalid book.");
@@ -151,9 +149,9 @@ public class IO {
         attempts = 3;
         while (attempts != 0) {
             System.out.println("Please enter member's first name: ");
-            String firstName = sc.nextLine();
+            String firstName = capitalize(sc.nextLine());
             System.out.println("Please enter member's surname: ");
-            String surname = sc.nextLine();
+            String surname = capitalize(sc.nextLine());
             user = l.findUser(firstName, surname);
             if (!l.isValidUser(user)) {
                 System.out.println("Not a member.");
@@ -180,6 +178,18 @@ public class IO {
         for (int i = 1; i < printList.length; i++) {
             System.out.println(printList[i]);
         }
+    }
+
+    private static String capitalize(String string) {
+        String tmp = "";
+        if (string.length() == 0){
+            return tmp;
+        }
+        String[] words = string.split("\\s+");
+        for (int i = 0; i < words.length; i++) {
+            tmp += words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase() + " ";
+        }
+        return tmp.trim();
     }
 
 }

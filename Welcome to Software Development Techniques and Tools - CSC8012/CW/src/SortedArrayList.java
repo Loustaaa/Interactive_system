@@ -8,7 +8,7 @@ public class SortedArrayList<E extends Comparable<E>> extends ArrayList<E> {
             return;
         }
         for (int i = 0; i < this.size(); i++) {
-            int comparison = item.compareTo((E) this.get(i));
+            int comparison = item.compareTo(this.get(i));
             if (comparison < 0) {
                 this.add(i, item);
                 return;

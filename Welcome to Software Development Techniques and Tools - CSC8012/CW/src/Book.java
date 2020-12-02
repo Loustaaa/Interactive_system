@@ -64,7 +64,10 @@ public class Book implements Comparable<Book> {
         if (authorcmp != 0) {
             return authorcmp;
         }
-        ;
-        return title.compareTo(book.getTitle());
+        int titlecmp = title.compareTo(book.getTitle());
+        if (titlecmp != 0){
+            return titlecmp;
+        }
+        return authorName.compareTo(book.getAuthorName());
     }
 }
