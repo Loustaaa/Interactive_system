@@ -1,0 +1,378 @@
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+b
+5 Book(s) Found.
+
+
+Book: Finite Transition Systems
+Author: Andre Arnold
+On loan: false
+
+
+Book: Java Gently
+Author: Judith Bishop
+On loan: false
+
+
+Book: Concurrent Programming
+Author: Stephen J. Hartley
+On loan: false
+
+
+Book: Petri Nets
+Author: Wolfgang Reisig
+On loan: false
+
+
+Book: Concurrent Programming
+Author: C. R. Snow
+On loan: false
+
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+u
+4 User(s) Found.
+
+
+User name: Zoe Brown
+Books held: 0
+
+
+User name: Anna Smith
+Books held: 0
+
+
+User name: John Smith
+Books held: 0
+
+
+User name: John Williams
+Books held: 0
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+foo
+Please enter author's surname:
+bar
+Please enter author's first name and/or initials:
+mf
+Invalid book.
+Please enter the book's title:
+
+Please enter author's surname:
+
+Please enter author's first name and/or initials:
+
+Please do not leave any fields empty.
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Please enter member's first name:
+z
+Please enter member's surname:
+e
+Not a member.
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book Issued.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+u
+4 User(s) Found.
+
+
+User name: Zoe Brown
+Books held: 1
+
+
+User name: Anna Smith
+Books held: 0
+
+
+User name: John Smith
+Books held: 0
+
+
+User name: John Williams
+Books held: 0
+
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+b
+5 Book(s) Found.
+
+
+Book: Finite Transition Systems
+Author: Andre Arnold
+On loan: false
+
+
+Book: Java Gently
+Author: Judith Bishop
+On loan: false
+
+
+Book: Concurrent Programming
+Author: Stephen J. Hartley
+On loan: false
+
+
+Book: Petri Nets
+Author: Wolfgang Reisig
+On loan: true
+
+
+Book: Concurrent Programming
+Author: C. R. Snow
+On loan: false
+
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Book already loaned.
+
+//printedData.txt contents here:
+Dear Zoe Brown
+Your copy of Petri Nets by Wolfgang Reisig has been requested by another library member.
+Please could you return it as soon as possible.
+
+Regards,
+Fake Town Library
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+r
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Cannot return a book that isn't loaned.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book Issued.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+r
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book returned
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book Issued.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+concurrent programming
+Please enter author's surname:
+snow
+Please enter author's first name and/or initials:
+c. r.
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book Issued.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+finite transitions systems
+Please enter author's surname:
+arnold
+Please enter author's first name and/or initials:
+andre
+Invalid book.
+Please enter the book's title:
+Finite Transition Systems
+Please enter author's surname:
+Arnold
+Please enter author's first name and/or initials:
+Andre
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book Issued.
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+i
+Please enter the book's title:
+java gently
+Please enter author's surname:
+bishop
+Please enter author's first name and/or initials:
+judith
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+This member has reached the maximum limit of books.
+
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+r
+Please enter the book's title:
+finite transition systems
+Please enter author's surname:
+arnold
+Please enter author's first name and/or initials:
+andre
+Please enter member's first name:
+zoe
+Please enter member's surname:
+brown
+Book returned
+------------------------------
+MENU
+f - Finish
+b - Display books held
+u - Display user information
+i - Issue book
+r - Return a book
+------------------------------
+r
+Please enter the book's title:
+petri nets
+Please enter author's surname:
+reisig
+Please enter author's first name and/or initials:
+wolfgang
+Please enter member's first name:
+john
+Please enter member's surname:
+smith
+User is holding no books.
