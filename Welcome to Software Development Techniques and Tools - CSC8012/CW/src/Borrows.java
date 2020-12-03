@@ -1,3 +1,6 @@
+/*
+A class I made to represent relationship between users and books. One borrows object represent a user having loaned this book.
+ */
 public class Borrows {
 
     private Book book;

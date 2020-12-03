@@ -1,3 +1,11 @@
+/*
+ * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
+ * Code is influenced by examples in lecture materials.
+ * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
+ * Original Author: Marta Koutny
+ * Modifying Author: Louie Franchino
+ * */
+
 import java.util.Scanner;
 
 public class IO {
@@ -7,7 +15,7 @@ public class IO {
 
     public IO() {
         try {
-            this.l = new Library("src/Library data.txt", "src/printedData.txt");
+            this.l = new Library("src/Librarydata.txt", "src/printedData.txt");
         } catch (Exception e) {
             System.out.println("Library data file cannot be found.");
         }
@@ -15,6 +23,7 @@ public class IO {
 
     }
 
+    // Program starts here.
     public static void main(String[] args) throws Exception {
         IO io = new IO();
         l.readFile();
@@ -27,6 +36,7 @@ public class IO {
 
             switch (input) {
                 case 'f':
+                    System.out.println("Quitting...");
                     l.close();
                     break;
                 case 'b':
@@ -53,6 +63,7 @@ public class IO {
 
     }
 
+    // Used in main class for displaying menu to user.
     private static void menu() {
         System.out.println("------------------------------");
         System.out.println("MENU");
@@ -64,27 +75,37 @@ public class IO {
         System.out.println("------------------------------");
     }
 
+    // Used for issuing books to members.
     private static void issueBook() {
         Book book = null;
         int attempts = 3;
         while (attempts != 0) {
-            System.out.println("Please enter the book's title: ");
-            String title = capitalize(sc.nextLine());
-            System.out.println("Please enter author's surname: ");
-            String surname = capitalize(sc.nextLine());
-            System.out.println("Please enter author's first name and/or initials: ");
-            String firstName = capitalize(sc.nextLine());
-            book = new Book(title, firstName, surname);
-            if (!l.isValidBook(book)) {
-                System.out.println("Invalid book.");
+            try {
+                System.out.println("Please enter the book's title: ");
+                String title = capitalize(sc.nextLine());
+                isEmpty(title);
+                System.out.println("Please enter author's surname: ");
+                String surname = capitalize(sc.nextLine());
+                isEmpty(surname);
+                System.out.println("Please enter author's first name and/or initials: ");
+                String firstName = capitalize(sc.nextLine());
+                isEmpty(firstName);
+                book = new Book(title, firstName, surname);
+                if (!l.isValidBook(book)) {
+                    System.out.println("Invalid book.");
+                    attempts--;
+                    continue;
+                } else if (l.available(book)) {
+                    System.out.println("Book already loaned.");
+                    l.notifyUser(book);
+                    return;
+                } else {
+                    break;
+                }
+            } catch (EmptyInputException e) {
+                System.out.println("No input entered.");
                 attempts--;
                 continue;
-            } else if (l.available(book)) {
-                System.out.println("Book already loaned");
-                l.notifyUser(book);
-                return;
-            } else {
-                break;
             }
         }
         if (attempts == 0) {
@@ -94,20 +115,28 @@ public class IO {
         User user = null;
         attempts = 3;
         while (attempts != 0) {
-            System.out.println("Please enter member's first name: ");
-            String firstName = capitalize(sc.nextLine());
-            System.out.println("Please enter member's surname: ");
-            String surname = capitalize(sc.nextLine());
-            user = l.findUser(firstName, surname);
-            if (!l.isValidUser(user)) {
-                System.out.println("Not a member.");
+            try {
+                System.out.println("Please enter member's first name: ");
+                String firstName = capitalize(sc.nextLine());
+                isEmpty(firstName);
+                System.out.println("Please enter member's surname: ");
+                String surname = capitalize(sc.nextLine());
+                isEmpty(surname);
+                user = l.findUser(firstName, surname);
+                if (!l.isValidUser(user)) {
+                    System.out.println("Not a member.");
+                    attempts--;
+                    continue;
+                } else if (!l.bookSpace(user)) {
+                    System.out.println("This member has reached the maximum limit of books.");
+                    return;
+                } else {
+                    break;
+                }
+            } catch (EmptyInputException e) {
+                System.out.println("No input entered.");
                 attempts--;
                 continue;
-            } else if (!l.bookSpace(user)) {
-                System.out.println("This member has reached the maximum limit of books.");
-                return;
-            } else {
-                break;
             }
         }
         if (attempts == 0) {
@@ -118,27 +147,36 @@ public class IO {
         System.out.println("Book Issued.");
     }
 
-
+    // Used for returning books from members to the library.
     private static void returnBook() {
         Book book = null;
         int attempts = 3;
         while (attempts != 0) {
-            System.out.println("Please enter the book's title: ");
-            String title = capitalize(sc.nextLine());
-            System.out.println("Please enter author's surname: ");
-            String surname = capitalize(sc.nextLine());
-            System.out.println("Please enter author's first name and/or initials: ");
-            String firstName = capitalize(sc.nextLine());
-            book = new Book(title, firstName, surname);
-            if (!l.isValidBook(book)) {
-                System.out.println("Invalid book.");
+            try {
+                System.out.println("Please enter the book's title: ");
+                String title = capitalize(sc.nextLine());
+                isEmpty(title);
+                System.out.println("Please enter author's surname: ");
+                String surname = capitalize(sc.nextLine());
+                isEmpty(surname);
+                System.out.println("Please enter author's first name and/or initials: ");
+                String firstName = capitalize(sc.nextLine());
+                isEmpty(firstName);
+                book = new Book(title, firstName, surname);
+                if (!l.isValidBook(book)) {
+                    System.out.println("Invalid book.");
+                    attempts--;
+                    continue;
+                } else if (!l.available(book)) {
+                    System.out.println("Cannot return a book that isn't loaned.");
+                    return;
+                } else {
+                    break;
+                }
+            } catch (EmptyInputException e) {
+                System.out.println("No input entered.");
                 attempts--;
                 continue;
-            } else if (!l.available(book)) {
-                System.out.println("Cannot return a book that isn't loaned.");
-                return;
-            } else {
-                break;
             }
         }
         if (attempts == 0) {
@@ -148,20 +186,28 @@ public class IO {
         User user = null;
         attempts = 3;
         while (attempts != 0) {
-            System.out.println("Please enter member's first name: ");
-            String firstName = capitalize(sc.nextLine());
-            System.out.println("Please enter member's surname: ");
-            String surname = capitalize(sc.nextLine());
-            user = l.findUser(firstName, surname);
-            if (!l.isValidUser(user)) {
-                System.out.println("Not a member.");
+            try {
+                System.out.println("Please enter member's first name: ");
+                String firstName = capitalize(sc.nextLine());
+                isEmpty(firstName);
+                System.out.println("Please enter member's surname: ");
+                String surname = capitalize(sc.nextLine());
+                isEmpty(surname);
+                user = l.findUser(firstName, surname);
+                if (!l.isValidUser(user)) {
+                    System.out.println("Not a member.");
+                    attempts--;
+                    continue;
+                } else if (!l.minusBookSpace(user)) {
+                    System.out.println("User is holding no books.");
+                    return;
+                } else {
+                    break;
+                }
+            } catch (EmptyInputException e) {
+                System.out.println("No input entered.");
                 attempts--;
                 continue;
-            } else if (!l.minusBookSpace(user)) {
-                System.out.println("User is holding no books.");
-                return;
-            } else {
-                break;
             }
         }
         if (attempts == 0) {
@@ -172,6 +218,7 @@ public class IO {
         System.out.println("Book returned");
     }
 
+    // Used for printing out userlist and booklist incrementally.
     private static void printer(String[] printList) throws Exception {
         System.out.println(printList[0]);
         Thread.sleep(2000);
@@ -180,9 +227,10 @@ public class IO {
         }
     }
 
+    // Capitalizes the first letter of each word and removes any spaces from either side of input.
     private static String capitalize(String string) {
         String tmp = "";
-        if (string.length() == 0){
+        if (string.length() == 0) {
             return tmp;
         }
         String[] words = string.split("\\s+");
@@ -190,6 +238,13 @@ public class IO {
             tmp += words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase() + " ";
         }
         return tmp.trim();
+    }
+
+    // Makes sure user does not input an empty string.
+    private static void isEmpty(String input) throws EmptyInputException {
+        if (input == "") {
+            throw new EmptyInputException();
+        }
     }
 
 }

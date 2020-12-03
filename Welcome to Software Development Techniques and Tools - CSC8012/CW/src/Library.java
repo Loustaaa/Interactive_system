@@ -1,3 +1,11 @@
+/*
+ * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
+ * Code is influenced by examples in lecture materials.
+ * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
+ * Original Author: Marta Koutny
+ * Modifying Author: Louie Franchino
+ * */
+
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,6 +27,7 @@ public class Library {
         this.outfile = new PrintWriter(outPathName);
     }
 
+    //Parses input file for user and book data. Adds all data to relevant lists.
     public void readFile() {
         ArrayList stringList = new ArrayList();
         while (inFile.hasNextLine()) {
@@ -69,6 +78,7 @@ public class Library {
         }
     }
 
+    // Prints reminder to txt file. Notifying user to return book.
     public void notifyUser(Book book) {
         for (Borrows b : borrowList) {
             if (b.getBook().compareTo(book) == 0) {
@@ -83,6 +93,7 @@ public class Library {
         }
     }
 
+    // Returns a String array containing the contents of user list for printing in IO class.
     public String[] printUsers() {
         String[] tmp = new String[userList.size() + 1];
         tmp[0] = String.format("%d User(s) Found.\n \n", userList.size());
@@ -92,6 +103,7 @@ public class Library {
         return tmp;
     }
 
+    // Returns a String array containing the contents of book list for printing in IO class.
     public String[] printBooks() {
         String[] tmp = new String[bookList.size() + 1];
         tmp[0] = String.format("%d Book(s) Found.\n \n", bookList.size());
@@ -101,6 +113,7 @@ public class Library {
         return tmp;
     }
 
+    // Checks that user exists in user list.
     public boolean isValidUser(User user) {
         for (Object u : userList) {
             User person = (User) u;
@@ -111,6 +124,7 @@ public class Library {
         return false;
     }
 
+    // Checks that book exists in book list.
     public boolean isValidBook(Book book) {
         for (Object b : bookList) {
             Book text = (Book) b;
@@ -121,6 +135,7 @@ public class Library {
         return false;
     }
 
+    // Checks that book has not been loaned.
     public boolean available(Book book) {
         for (Object b : bookList) {
             Book text = (Book) b;
@@ -131,6 +146,7 @@ public class Library {
         return false;
     }
 
+    // Checks whether a user has already reached their max number of books or not. If not, increments user's booksHeld value by one.
     public boolean bookSpace(User user) {
         for (int i = 0; i < userList.size(); i++) {
             User person = (User) userList.get(i);
@@ -140,7 +156,6 @@ public class Library {
                 } else {
                     int amount = user.getBooksHeld() + 1;
                     user.setBooksHeld(amount);
-                    userList.set(i, user);
                     return true;
                 }
             }
@@ -148,6 +163,7 @@ public class Library {
         return true;
     }
 
+    // Checks whether a user has books held. Decrements by one if user has any books.
     public boolean minusBookSpace(User user) {
         for (int i = 0; i < userList.size(); i++) {
             User person = (User) userList.get(i);
@@ -164,6 +180,7 @@ public class Library {
         return true;
     }
 
+    // Updates books isLoaned field to show book is loaned. Adds book and user to borrowlist to show ownership.
     public void loanBook(Book book, User user) {
         for (Object b : bookList) {
             Book text = (Book) b;
@@ -176,6 +193,7 @@ public class Library {
         }
     }
 
+    // Updates books isLoaned field to show book has been returned. Calls unborrow function to remove items from borrowlist.
     public void updateRecords(Book book, User user) {
         for (Object b : bookList) {
             Book text = (Book) b;
@@ -187,6 +205,7 @@ public class Library {
         }
     }
 
+    // Finds borrows object in borrowlist and removes it.
     private void unborrow(User user, Book book) {
         for (Borrows borrows : borrowList) {
             Book borrowBook = borrows.getBook();
@@ -198,6 +217,7 @@ public class Library {
         }
     }
 
+    // Looks for existing user in user list and returns it if found. Returns new user object if not found.
     public User findUser(String fName, String sName) {
         for (Object u : userList) {
             User user = (User) u;
@@ -210,6 +230,7 @@ public class Library {
         return new User(fName, sName);
     }
 
+    // Closes filewriter object.
     public void close() {
         outfile.close();
     }

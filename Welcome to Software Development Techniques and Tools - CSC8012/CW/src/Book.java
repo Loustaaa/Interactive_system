@@ -1,3 +1,10 @@
+/*
+ * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
+ * Code is influenced by examples in lecture materials.
+ * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
+ * Original Author: Marta Koutny
+ * Modifying Author: Louie Franchino
+ * */
 public class Book implements Comparable<Book> {
 
     private String title;
@@ -5,6 +12,7 @@ public class Book implements Comparable<Book> {
     private String authorSurname;
     private boolean loaned;
 
+    // Creates Book objects
     public Book(String title, String authorName, String authorSurname, boolean loaned) {
         this.title = title;
         this.authorName = authorName;
@@ -51,6 +59,7 @@ public class Book implements Comparable<Book> {
         this.loaned = loaned;
     }
 
+    // Returns formatted string with book details.
     @Override
     public String toString() {
         return String.format("Book: %s \n" +
@@ -58,6 +67,12 @@ public class Book implements Comparable<Book> {
                 "On loan: %b", title, authorName, authorSurname, loaned);
     }
 
+    /*
+    Used for book object comparison in order of importance:
+       1. authorSurname
+       2. title
+       3. authorName
+    */
     @Override
     public int compareTo(Book book) {
         int authorcmp = authorSurname.compareTo(book.getAuthorSurname());
@@ -65,7 +80,7 @@ public class Book implements Comparable<Book> {
             return authorcmp;
         }
         int titlecmp = title.compareTo(book.getTitle());
-        if (titlecmp != 0){
+        if (titlecmp != 0) {
             return titlecmp;
         }
         return authorName.compareTo(book.getAuthorName());
