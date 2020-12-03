@@ -1,5 +1,4 @@
 /*
- * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
  * Code is influenced by examples in lecture materials.
  * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
  * Original Author: Marta Koutny

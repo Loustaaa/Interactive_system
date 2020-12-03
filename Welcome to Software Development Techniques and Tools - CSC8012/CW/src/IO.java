@@ -1,5 +1,4 @@
 /*
- * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
  * Code is influenced by examples in lecture materials.
  * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
  * Original Author: Marta Koutny
@@ -83,13 +82,13 @@ public class IO {
             try {
                 System.out.println("Please enter the book's title: ");
                 String title = capitalize(sc.nextLine());
-                isEmpty(title);
                 System.out.println("Please enter author's surname: ");
                 String surname = capitalize(sc.nextLine());
-                isEmpty(surname);
                 System.out.println("Please enter author's first name and/or initials: ");
                 String firstName = capitalize(sc.nextLine());
+                isEmpty(title);
                 isEmpty(firstName);
+                isEmpty(surname);
                 book = new Book(title, firstName, surname);
                 if (!l.isValidBook(book)) {
                     System.out.println("Invalid book.");
@@ -103,7 +102,7 @@ public class IO {
                     break;
                 }
             } catch (EmptyInputException e) {
-                System.out.println("No input entered.");
+                System.out.println("Please do not leave any fields empty.");
                 attempts--;
                 continue;
             }
@@ -118,9 +117,9 @@ public class IO {
             try {
                 System.out.println("Please enter member's first name: ");
                 String firstName = capitalize(sc.nextLine());
-                isEmpty(firstName);
                 System.out.println("Please enter member's surname: ");
                 String surname = capitalize(sc.nextLine());
+                isEmpty(firstName);
                 isEmpty(surname);
                 user = l.findUser(firstName, surname);
                 if (!l.isValidUser(user)) {
@@ -134,7 +133,7 @@ public class IO {
                     break;
                 }
             } catch (EmptyInputException e) {
-                System.out.println("No input entered.");
+                System.out.println("Please do not leave any fields empty.");
                 attempts--;
                 continue;
             }
@@ -155,12 +154,12 @@ public class IO {
             try {
                 System.out.println("Please enter the book's title: ");
                 String title = capitalize(sc.nextLine());
-                isEmpty(title);
                 System.out.println("Please enter author's surname: ");
                 String surname = capitalize(sc.nextLine());
-                isEmpty(surname);
                 System.out.println("Please enter author's first name and/or initials: ");
                 String firstName = capitalize(sc.nextLine());
+                isEmpty(title);
+                isEmpty(surname);
                 isEmpty(firstName);
                 book = new Book(title, firstName, surname);
                 if (!l.isValidBook(book)) {
@@ -174,7 +173,7 @@ public class IO {
                     break;
                 }
             } catch (EmptyInputException e) {
-                System.out.println("No input entered.");
+                System.out.println("Please do not leave any fields empty.");
                 attempts--;
                 continue;
             }
@@ -189,9 +188,9 @@ public class IO {
             try {
                 System.out.println("Please enter member's first name: ");
                 String firstName = capitalize(sc.nextLine());
-                isEmpty(firstName);
                 System.out.println("Please enter member's surname: ");
                 String surname = capitalize(sc.nextLine());
+                isEmpty(firstName);
                 isEmpty(surname);
                 user = l.findUser(firstName, surname);
                 if (!l.isValidUser(user)) {
@@ -205,7 +204,7 @@ public class IO {
                     break;
                 }
             } catch (EmptyInputException e) {
-                System.out.println("No input entered.");
+                System.out.println("Please do not leave any fields empty.");
                 attempts--;
                 continue;
             }

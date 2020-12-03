@@ -1,5 +1,4 @@
 /*
- * A generic class which extends superclass ArrayList. SortedArrayList will hold any object which implements the comparable interface.
  * Code is influenced by examples in lecture materials.
  * - https://ncl.instructure.com/courses/24648/pages/lecture-notes?module_item_id=1212359
  * Original Author: Marta Koutny
@@ -66,7 +65,7 @@ public class User implements Comparable<User> {
         if (lncmp != 0) {
             return lncmp;
         }
-        int fncmp = firstName.compareTo(user.getFirstName());
-        return fncmp;
+        return firstName.compareTo(user.getFirstName());
+
     }
 }
