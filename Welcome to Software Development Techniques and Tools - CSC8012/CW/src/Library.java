@@ -5,6 +5,7 @@
  * Modifying Author: Louie Franchino
  * */
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,18 +13,20 @@ import java.util.Scanner;
 
 public class Library {
 
-    SortedArrayList<User> userList;
-    SortedArrayList<Book> bookList;
-    ArrayList<Borrows> borrowList;
-    static Scanner inFile;
-    static PrintWriter outfile;
+    private SortedArrayList<User> userList;
+    private SortedArrayList<Book> bookList;
+    private static Scanner inFile;
+    private static PrintWriter outfile;
 
-    public Library(String inPathName, String outPathName) throws Exception {
+    public Library() {
         this.userList = new SortedArrayList<>();
         this.bookList = new SortedArrayList<>();
-        this.borrowList = new ArrayList();
-        this.inFile = new Scanner(new FileReader(inPathName));
-        this.outfile = new PrintWriter(outPathName);
+        try {
+            this.inFile = new Scanner(new FileReader("src/Librarydata.txt"));
+            this.outfile = new PrintWriter("src/printedData.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("Library data file cannot be found.");
+        }
     }
 
     //Parses input file for user and book data. Adds all data to relevant lists.
@@ -79,17 +82,15 @@ public class Library {
 
     // Prints reminder to txt file. Notifying user to return book.
     public void notifyUser(Book book) {
-        for (Borrows b : borrowList) {
-            if (b.getBook().compareTo(book) == 0) {
-                User user = b.getUser();
-                String receipt = String.format("Dear %s %s \n" +
-                        "Your copy of %s by %s %s has been requested by another library member. \n" +
-                        "Please could you return it as soon as possible. \n \n" +
-                        "Regards, \n" +
-                        "Fake Town Library \n \n", user.getFirstName(), user.getSurname(), book.getTitle(), book.getAuthorName(), book.getAuthorSurname());
-                outfile.write(receipt);
-            }
-        }
+        User user = book.getUser();
+        String receipt = String.format("Dear %s %s \n" +
+                "Your copy of %s by %s %s has been requested by another library member. \n" +
+                "Please could you return it as soon as possible. \n \n" +
+                "Regards, \n" +
+                "Fake Town Library \n \n", user.getFirstName(), user.getSurname(), book.getTitle(), book.getAuthorName(), book.getAuthorSurname());
+        outfile.write(receipt);
+
+
     }
 
     // Returns a String array containing the contents of user list for printing in IO class.
@@ -179,41 +180,35 @@ public class Library {
         return true;
     }
 
-    // Updates books isLoaned field to show book is loaned. Adds book and user to borrowlist to show ownership.
+    // Updates books isLoaned and user field to show book is loaned.
     public void loanBook(Book book, User user) {
         for (Object b : bookList) {
             Book text = (Book) b;
             if (text.compareTo(book) == 0) {
                 text.setLoaned(true);
-                Borrows borrows = new Borrows(book, user);
-                borrowList.add(borrows);
+                book.setUser(user);
                 return;
             }
         }
     }
 
-    // Updates books isLoaned field to show book has been returned. Calls unborrow function to remove items from borrowlist.
+    // Updates books isLoaned and user fields to show book has been returned.
     public void updateRecords(Book book, User user) {
         for (Object b : bookList) {
             Book text = (Book) b;
             if (text.compareTo(book) == 0) {
                 text.setLoaned(false);
-                unborrow(user, book);
+                text.setUser(null);
                 return;
             }
         }
     }
 
-    // Finds borrows object in borrowlist and removes it.
-    private void unborrow(User user, Book book) {
-        for (Borrows borrows : borrowList) {
-            Book borrowBook = borrows.getBook();
-            User borrowUser = borrows.getUser();
-            if ((borrowBook.compareTo(book) == 0) && (borrowUser.compareTo(user) == 0)) {
-                borrowList.remove(borrows);
-                return;
-            }
-        }
+    // Checks to see if a specific user is loaning a specific book.
+    public boolean isBorrowing(Book book, User user) {
+        if (book.getUser().compareTo(user) == 0) {
+            return true;
+        } else return false;
     }
 
     // Looks for existing user in user list and returns it if found. Returns new user object if not found.
@@ -232,5 +227,19 @@ public class Library {
     // Closes filewriter object.
     public void close() {
         outfile.close();
+    }
+
+    // Looks for existing user in user list and returns it if found. Returns new user object if not found.
+    public Book findBook(String title, String firstName, String surname) {
+        for (Object b : bookList) {
+            Book book = (Book) b;
+            String t = book.getTitle();
+            String fName = book.getAuthorName();
+            String sName = book.getAuthorSurname();
+            if (t.matches(title) && (fName.matches(firstName)) && (sName.matches(surname))) {
+                return book;
+            }
+        }
+        return new Book(title, firstName, surname);
     }
 }

@@ -9,6 +9,8 @@ public class Book implements Comparable<Book> {
     private String title;
     private String authorName;
     private String authorSurname;
+
+    private User user;
     private boolean loaned;
 
     // Creates Book objects
@@ -16,6 +18,7 @@ public class Book implements Comparable<Book> {
         this.title = title;
         this.authorName = authorName;
         this.authorSurname = authorSurname;
+        this.user = null;
         this.loaned = loaned;
     }
 
@@ -23,6 +26,7 @@ public class Book implements Comparable<Book> {
         this.title = title;
         this.authorName = authorName;
         this.authorSurname = authorSurname;
+        this.user = null;
         this.loaned = false;
     }
 
@@ -48,6 +52,14 @@ public class Book implements Comparable<Book> {
 
     public void setAuthorSurname(String authorSurname) {
         this.authorSurname = authorSurname;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isLoaned() {

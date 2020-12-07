@@ -9,17 +9,11 @@ import java.util.Scanner;
 
 public class IO {
 
-    private static Library l;
+    final private static Library l = new Library();
     static Scanner sc;
 
     public IO() {
-        try {
-            this.l = new Library("src/Librarydata.txt", "src/printedData.txt");
-        } catch (Exception e) {
-            System.out.println("Library data file cannot be found.");
-        }
         this.sc = new Scanner(System.in);
-
     }
 
     // Program starts here.
@@ -56,6 +50,7 @@ public class IO {
                     break;
                 default:
                     System.out.println("Invalid entry, try again.");
+                    Thread.sleep(1000);
             }
 
         }
@@ -89,7 +84,7 @@ public class IO {
                 isEmpty(title);
                 isEmpty(firstName);
                 isEmpty(surname);
-                book = new Book(title, firstName, surname);
+                book = l.findBook(title, firstName, surname);
                 if (!l.isValidBook(book)) {
                     System.out.println("Invalid book.");
                     attempts--;
@@ -161,7 +156,7 @@ public class IO {
                 isEmpty(title);
                 isEmpty(surname);
                 isEmpty(firstName);
-                book = new Book(title, firstName, surname);
+                book = l.findBook(title, firstName, surname);
                 if (!l.isValidBook(book)) {
                     System.out.println("Invalid book.");
                     attempts--;
@@ -195,6 +190,10 @@ public class IO {
                 user = l.findUser(firstName, surname);
                 if (!l.isValidUser(user)) {
                     System.out.println("Not a member.");
+                    attempts--;
+                    continue;
+                } else if (!l.isBorrowing(book, user)) {
+                    System.out.println("User is not borrowing this book");
                     attempts--;
                     continue;
                 } else if (!l.minusBookSpace(user)) {
